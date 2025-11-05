@@ -13,7 +13,9 @@ export const useUserData = defineStore('userData', {
     userPhones: [],
     userEmails: [],
     userPasswords: [],
-    isLoggedIn: false,
+
+    // By default is false (because this feature is considered as a optional feature)
+    isLoggedIn: false, 
     userLatLang: [],
   }),
 
@@ -45,6 +47,8 @@ export const useUserData = defineStore('userData', {
       this.userPasswords.push(pass)
       this.userLatLang.push(false)
 
+      // After signing up, users will automatically head to login section
+      // We did this because of the code integrity (otherwise we need had redundancy)
       this.saveToLocalStorage();
       this.logInUser(phone, email, pass)
     },
@@ -76,6 +80,8 @@ export const useUserData = defineStore('userData', {
 
     setUserLatLang(latLng) {
       this.currentLatLang = latLng
+      // We need to find the user's index to replace their location (by default
+      // is False)
       const index = this.userPhones.indexOf(this.currentUserPhone)
       this.userLatLang[index] = latLng
 

@@ -8,6 +8,7 @@ const router = useRouter()
 const userStore = useUserData()
 const { isLoggedIn: userLoggedIn, logInToggle } = userStore
 
+// Redirect User To Signin Page
 watchEffect(() => {
   if (!userLoggedIn) {
     router.push('/signin')

@@ -3,6 +3,9 @@ import { useUserData } from '@/stores/UserStore'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+// We use this component in both Signin and Login page
+// So we need to know which component the flow are coming from
+// Using the following we can find out
 const userStatus = defineProps({
   userJourneyStatus: String,
 })
@@ -17,12 +20,14 @@ const userStore = useUserData()
 const { setUser, logInUser } = userStore
 
 const submitHandler = (phone, email, pass) => {
+  // If the component called in Signin page
   const LowerEmail = email.toLowerCase()
   if (userStatus.userJourneyStatus === 'signin') {
     setUser(phone, LowerEmail, pass)
     router.push('/')
   }
 
+  // If the component called in Login page
   if (userStatus.userJourneyStatus === 'login') {
     const LowerEmail = email.toLowerCase()
     logInUser(phone, LowerEmail, pass)
