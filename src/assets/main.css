@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+}
+
+/* Override DaisyUI input width */
+.input {
+  @apply w-full max-w-[460px];
+  @apply sm:bg-[#190733];
+  @apply lg:bg-[#261046];
+
+}
+
+@theme {
+  --breakpoint-3xl: 1320px;
+  --breakpoint-smmd: 524px;
+  --breakpoint-sm: 0px;
+}
+
+body{
+    font-family: 'Poppins';
+    height: 100vh;
+    @apply sm:bg-[#240B48]
+}
