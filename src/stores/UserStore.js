@@ -15,13 +15,14 @@ export const useUserData = defineStore('userData', {
     userPasswords: [],
     userLatLang: [],
 
-    // By default is false (because this feature is considered as a optional feature)
-    isLoggedIn: false,
   }),
 
   getters: {
     isUserLoggedIn() {
-      return this.isLoggedIn
+      if (this.currentUserPhone){
+        return true
+      }
+      return false
     },
 
     getUserLatLang() {
@@ -30,7 +31,7 @@ export const useUserData = defineStore('userData', {
   },
 
   actions: {
-    loadFromLocalStorage() {
+    loadAllDataFromLocalStorage() {
       const storedData = localStorage.getItem('userStore')
       if (storedData) {
         this.$patch(JSON.parse(storedData))
@@ -71,7 +72,6 @@ export const useUserData = defineStore('userData', {
     },
 
     logout() {
-      this.isLoggedIn = false
       this.currentUserEmail = ''
       this.currentUserPass = ''
       this.currentUserPhone = ''

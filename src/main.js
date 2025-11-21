@@ -13,6 +13,6 @@ app.use(createPinia())
 app.use(router)
 
 const userStore = useUserData();
-userStore.loadFromLocalStorage();
+userStore.loadAllDataFromLocalStorage();
 
 app.mount('#app')

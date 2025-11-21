@@ -6,18 +6,18 @@ import Leaflet from '@/components/login/Leaflet.vue'
 
 const router = useRouter()
 const userStore = useUserData()
-const { isLoggedIn: userLoggedIn, logout } = userStore
+const { isUserLoggedIn, logout } = userStore
 
 // Redirect User To Signin Page
 watchEffect(() => {
-  if (!userLoggedIn) {
+  if (!isUserLoggedIn) {
     router.push('/signin')
   }
 })
 </script>
 
 <template>
-  <div v-if="userLoggedIn" class="w-full h-screen flex justify-center items-center">
+  <div v-if="isUserLoggedIn" class="w-full h-screen flex justify-center items-center">
     <div class="w-[35%] text-center px-3">
       <h1 class="bg-orange-500 p-3 mb-2 rounded-2xl">Welcome</h1>
       <div class="bg-orange-500 p-3 mb-2 rounded-2xl">
