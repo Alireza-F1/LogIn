@@ -2,7 +2,7 @@
 import { useUserData } from '@/stores/UserStore'
 import { watchEffect } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
-import Leaflet from '../components/Leaflet.vue'
+import Leaflet from '@/components/Leaflet.vue'
 
 const router = useRouter()
 const userStore = useUserData()

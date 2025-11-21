@@ -21,7 +21,10 @@
 }
 
 body{
-    font-family: 'Poppins';
     height: 100vh;
     @apply sm:bg-[#240B48]
+}
+
+*{
+  font-family: 'Poppins';
 }

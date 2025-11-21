@@ -23,7 +23,7 @@ function onMapClick(e) {
 }
 
 // When users come to their dashboards, they should see their selected location
-// If they selected before
+// If they have selected before
 onMounted(() => {
   if (getUserLatLang) {
     userLocation.value = getUserLatLang

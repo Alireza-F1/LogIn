@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SignInForm from '../components/signin/SignInForm.vue'
+import SignInForm from '@/components/signin/SignInForm.vue'
 import { RouterLink } from 'vue-router';
 </script>
 

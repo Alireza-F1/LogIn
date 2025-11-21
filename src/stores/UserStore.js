@@ -42,6 +42,7 @@ export const useUserData = defineStore('userData', {
     },
 
     setUser(phone, email, pass) {
+      // Save user's data to database
       this.userPhones.push(phone)
       this.userEmails.push(email)
       this.userPasswords.push(pass)

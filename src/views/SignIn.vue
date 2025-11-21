@@ -1,7 +1,7 @@
 <script setup>
-import SignInForm from '../components/signin/SignInForm.vue'
-import LeftImageContainer from '../components/signin/LeftImageContainer.vue';
-import ButtonContainer from '../components/signin/ButtonContainer.vue';
+import SignInForm from '@/components/signin/SignInForm.vue'
+import LeftImageContainer from '@/components/signin/LeftImageContainer.vue';
+import ButtonContainer from '@/components/signin/ButtonContainer.vue';
 
 </script>
 
