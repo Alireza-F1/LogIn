@@ -13,10 +13,10 @@ export const useUserData = defineStore('userData', {
     userPhones: [],
     userEmails: [],
     userPasswords: [],
+    userLatLang: [],
 
     // By default is false (because this feature is considered as a optional feature)
-    isLoggedIn: false, 
-    userLatLang: [],
+    isLoggedIn: false,
   }),
 
   getters: {
@@ -26,7 +26,7 @@ export const useUserData = defineStore('userData', {
 
     getUserLatLang() {
       return this.currentLatLang
-    }
+    },
   },
 
   actions: {
@@ -50,33 +50,33 @@ export const useUserData = defineStore('userData', {
 
       // After signing up, users will automatically head to login section
       // We did this because of the code integrity (otherwise we need had redundancy)
-      this.saveToLocalStorage();
-      this.logInUser(phone, email, pass)
+      this.saveToLocalStorage()
+      this.logInUser(phone, pass)
     },
 
-    logInUser(phone, email, pass) {
-      for (let i = 0; i < this.userPhones.length; i++) {
-        if (
-          this.userPhones[i] === phone &&
-          this.userPasswords[i] === pass &&
-          this.userEmails[i] == email
-        ) {
-          this.isLoggedIn = true
+    logInUser(phone, pass) {
+      const index_phone = this.userPhones.indexOf(phone)
+      const index_pass = this.userPasswords.indexOf(pass)
 
-          this.currentLatLang = this.userLatLang[i]
-          this.currentUserEmail = this.userEmails[i]
-          this.currentUserPass = this.userPasswords[i]
-          this.currentUserPhone = this.userPhones[i]
+      if (index_phone === index_pass) {
+        this.isLoggedIn = true
 
-          this.saveToLocalStorage();  
-          break
-        }
+        this.currentLatLang = this.userLatLang[index_phone]
+        this.currentUserEmail = this.userEmails[index_phone]
+        this.currentUserPass = this.userPasswords[index_phone]
+        this.currentUserPhone = this.userPhones[index_phone]
+
+        this.saveToLocalStorage()
       }
     },
 
-    logInToggle() {
-      this.isLoggedIn = !this.isLoggedIn
-      this.saveToLocalStorage();
+    logout() {
+      this.isLoggedIn = false
+      this.currentUserEmail = ''
+      this.currentUserPass = ''
+      this.currentUserPhone = ''
+      this.currentLatLang = false
+      this.saveToLocalStorage()
     },
 
     setUserLatLang(latLng) {
@@ -86,7 +86,7 @@ export const useUserData = defineStore('userData', {
       const index = this.userPhones.indexOf(this.currentUserPhone)
       this.userLatLang[index] = latLng
 
-      this.saveToLocalStorage();
+      this.saveToLocalStorage()
     },
   },
 })

@@ -1,33 +1,31 @@
 <script setup>
-import { useUserData } from '@/stores/UserStore'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useUserData } from '@/stores/UserStore'
 import InputPhoneSVG from '@/components/svg/InputPhoneSVG.vue'
-import InputEmailSVG from '@/components/svg/InputEmailSVG.vue'
 import InputPassSVG from '@/components/svg/InputPassSVG.vue'
-
-const router = useRouter()
-
-const userPhone = ref('')
-const userEmail = ref('')
-const userPassword = ref('')
+import { useRouter } from 'vue-router'
 
 const userStore = useUserData()
-const { setUser } = userStore
+const router = useRouter()
+const userPhone = ref('')
+const userPassword = ref('')
 
-const submitHandler = (phone, email, pass) => {
-  const LowerEmail = email.toLowerCase()
-  console.log('before');
-  
-  setUser(phone, LowerEmail, pass)
-  console.log('after');
-  router.push('/')
+const { logInUser } = userStore
+
+const submitHandler = (phone, pass) => {
+  logInUser(phone, pass)
+
+  if (userStore.isLoggedIn) {
+    router.push('/')
+  } else {
+    alert('Your information is not correct. Please make sure you insert them right.')
+  }
 }
 </script>
 
 <template>
   <form
-    @submit.prevent="submitHandler(userPhone, userEmail, userPassword)"
+    @submit.prevent="submitHandler(userPhone, userPassword)"
     class="flex flex-col w-full"
   >
     <div class="PhoneInput mb-2.5">
@@ -46,20 +44,6 @@ const submitHandler = (phone, email, pass) => {
         />
       </label>
       <p class="validator-hint hidden">Must be 11 digits</p>
-    </div>
-
-    <div class="EmailInput mb-2.5">
-      <label class="input validator sm:h-[55px] lg:h-10">
-        <InputEmailSVG />
-        <input
-          v-model="userEmail"
-          type="email"
-          placeholder="youremail@gmail.com"
-          required
-          pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9](?:[a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+$"
-        />
-      </label>
-      <div class="validator-hint hidden">Enter valid email address</div>
     </div>
 
     <div class="PasswordInput sm-mb-[18px] mb-[22.56px]">

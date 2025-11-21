@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LoginForm from '@/components/login/LoginForm.vue';
 import SignInForm from '@/components/signin/SignInForm.vue'
 import { RouterLink } from 'vue-router';
 </script>
@@ -11,7 +12,7 @@ import { RouterLink } from 'vue-router';
       >
         Log in
       </h1>
-      <SignInForm :user-journey-status="'login'"/>
+      <LoginForm />
 
       <div class="mt-5 font-bold text-[10px] text-[#B6B6B6] tracking-[8%] leading-[100%]">
         <p>You Don't Have an Account? <RouterLink to="/signin"> <span class="text-[#8d63c8]">Sign Up</span></RouterLink> </p>

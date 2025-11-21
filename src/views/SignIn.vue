@@ -30,7 +30,7 @@ import ButtonContainer from '@/components/signin/ButtonContainer.vue';
           Sign in with email address
         </p>
 
-        <SignInForm :user-journey-status="'signin'"/>
+        <SignInForm />
 
         <ButtonContainer />
 

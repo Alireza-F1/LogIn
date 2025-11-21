@@ -2,11 +2,11 @@
 import { useUserData } from '@/stores/UserStore'
 import { watchEffect } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
-import Leaflet from '@/components/Leaflet.vue'
+import Leaflet from '@/components/login/Leaflet.vue'
 
 const router = useRouter()
 const userStore = useUserData()
-const { isLoggedIn: userLoggedIn, logInToggle } = userStore
+const { isLoggedIn: userLoggedIn, logout } = userStore
 
 // Redirect User To Signin Page
 watchEffect(() => {
@@ -34,7 +34,7 @@ watchEffect(() => {
         <Leaflet />
       </div>
       <RouterLink to="/signin" class="inline-block bg-blue-500 p-3 rounded-2xl"
-        ><span @click="logInToggle()">Log Out</span></RouterLink
+        ><span @click="logout()">Log Out</span></RouterLink
       >
     </div>
   </div>
