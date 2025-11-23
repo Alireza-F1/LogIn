@@ -1,19 +1,11 @@
 <script setup lang="ts">
 import { useUserData } from '@/stores/UserStore'
-import { watchEffect } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
 import Leaflet from '@/components/login/Leaflet.vue'
 
 const router = useRouter()
 const userStore = useUserData()
 const { isUserLoggedIn, logout } = userStore
-
-// Redirect User To Signin Page
-watchEffect(() => {
-  if (!isUserLoggedIn) {
-    router.push('/signin')
-  }
-})
 </script>
 
 <template>
