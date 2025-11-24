@@ -2,9 +2,7 @@
 import { useUserData } from '@/stores/UserStore'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import InputPhoneSVG from '@/components/svg/InputPhoneSVG.vue'
-import InputEmailSVG from '@/components/svg/InputEmailSVG.vue'
-import InputPassSVG from '@/components/svg/InputPassSVG.vue'
+import InputComponent from '@/components/InputComponent.vue'
 
 const router = useRouter()
 
@@ -17,10 +15,7 @@ const { setUser } = userStore
 
 const submitHandler = (phone, email, pass) => {
   const LowerEmail = email.toLowerCase()
-  console.log('before');
-  
   setUser(phone, LowerEmail, pass)
-  console.log('after');
   router.push('/')
 }
 </script>
@@ -30,56 +25,9 @@ const submitHandler = (phone, email, pass) => {
     @submit.prevent="submitHandler(userPhone, userEmail, userPassword)"
     class="flex flex-col w-full"
   >
-    <div class="PhoneInput mb-2.5">
-      <label class="input validator sm:h-[55px] lg:h-10">
-        <InputPhoneSVG />
-        <input
-          v-model="userPhone"
-          type="tel"
-          class="tabular-nums"
-          required
-          placeholder="Your Phone Number"
-          pattern="[0-9]*"
-          minlength="11"
-          maxlength="11"
-          title="Must be 11 digits"
-        />
-      </label>
-      <p class="validator-hint hidden">Must be 11 digits</p>
-    </div>
-
-    <div class="EmailInput mb-2.5">
-      <label class="input validator sm:h-[55px] lg:h-10">
-        <InputEmailSVG />
-        <input
-          v-model="userEmail"
-          type="email"
-          placeholder="youremail@gmail.com"
-          required
-          pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9](?:[a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+$"
-        />
-      </label>
-      <div class="validator-hint hidden">Enter valid email address</div>
-    </div>
-
-    <div class="PasswordInput sm-mb-[18px] mb-[22.56px]">
-      <label class="input validator sm:h-[55px] lg:h-10">
-        <InputPassSVG />
-        <input
-          v-model="userPassword"
-          type="password"
-          required
-          placeholder="Password"
-          minlength="8"
-          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-          title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
-        />
-      </label>
-      <p class="validator-hint hidden">
-        Must be more than 8 characters, including 1) At least one number 2)At least one lowercase
-        letter 3) At least one uppercase letter
-      </p>
-    </div>
+    <InputComponent v-model="userPhone" status="phone" />
+    <InputComponent v-model="userEmail" status="email" />
+    <InputComponent v-model="userPassword" status="password" />
 
     <div>
       <button
